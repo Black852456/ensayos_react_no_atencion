@@ -1,24 +1,31 @@
  import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
-
-function calcular(e){
-    e.preventDefault();
-    let numero1 = parseInt(document.getElementById("numero1").value);
-    let numero2 = parseInt(document.getElementById("numero2").value);
-    alert("La suma de los numeros es: "+(numero1+numero2));
-}
 
 function App() {
+    function generarAleatorios(){
+      const numeros = new Array(5);
+      for (let i = 0; i < numeros.length; i++) {
+        let numeroAleatorio = Math.trunc(Math.random()*10);  
+        numeros[i] = numeroAleatorio;
+      }
+      setNumeros(numeros)
+    }
+
+    //Hooks son como variables que se pueden reasignar con una funcion como medio que puede tener un datos inicial
+    // es parecido a un variable pero es mas como un objeto con un set y un constructor inicial en uno
+    const [numeros,setNumeros] = useState([0,0,0,0,0]);
+
     return (
     <div>
-      <form onSubmit={calcular}>
-      <p>Ingrese el primer numero</p>
-      <input type="number" id='numero1'/>
-      <p>Ingrese el segundo Numero</p>
-      <input type="number" id='numero2'/>
-      <button type='submit'>Calcular</button>
-      </form>
+      <p>numeroAleatorio : {numeros}</p>
+      {
+      numeros.map(num =>
+        <p>{num}</p>
+      )
+      }
+      <button onClick={generarAleatorios }>Cambio Valor</button>
     </div>
   );
 }
