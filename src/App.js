@@ -1,37 +1,30 @@
  import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  const siglo = 21;
-  const persona = {
-    nombre:"cualquiera",
-    edad:"300"
-  }
-  const paginas = [
-    "http://www.google.com",
-    "http://www.youtube.com",
-    "http://www.lectormanga.com"
-  ];
 
-  return (
+function calcular(e){
+    e.preventDefault();
+    let numero1 = parseInt(document.getElementById("numero1").value);
+    let numero2 = parseInt(document.getElementById("numero2").value);
+    alert("La suma de los numeros es: "+(numero1+numero2));
+}
+
+function App() {
+    return (
     <div>
-    <h1>Contenido de las variables</h1>
-    <h2>{siglo}</h2>
-    <p>{persona.nombre}</p>
-    <p>{persona.edad}</p>
-    <p>{retornarNumeroAleatorio()}</p>
-    <a _blank href={paginas[0]}>Google</a>
-    <p>Contenido titulo = {mostrarTitulo("Nuevo Contenido")}</p>
+      <form onSubmit={calcular}>
+      <p>Ingrese el primer numero</p>
+      <input type="number" id='numero1'/>
+      <p>Ingrese el segundo Numero</p>
+      <input type="number" id='numero2'/>
+      <button type='submit'>Calcular</button>
+      </form>
     </div>
   );
 }
 
-function retornarNumeroAleatorio(){
-  return Math.trunc(Math.random*10);
-}
 
-function mostrarTitulo(titulo){
-  return titulo;
-}
+
+
 
 export default App;
