@@ -12,20 +12,17 @@ function App() {
     let valor3 = Math.trunc(Math.random()*6)+1;
 
   function CambiarValor(){
+    
     setValor(
-      [Math.trunc(Math.random()*6)+1,
-        Math.trunc(Math.random()*6)+1,
-        Math.trunc(Math.random()*6)+1]
+      valor+1
     );
   }
 
-    let [valor,setValor] = useState([0,0,0])
+    let [valor,setValor] = useState(0)
 
     return (
     <div>
-      <Dado valor={valor[0]}/>
-      <Dado valor={valor[1]}/>
-      <Dado valor={valor[2]}/>
+      <Dado valor={valor}/>
       <button onClick={CambiarValor}>Cambio</button>
     </div>
   );
