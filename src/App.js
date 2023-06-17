@@ -4,28 +4,57 @@ import { useState } from 'react';
 
 
 function App() {
-    function generarAleatorios(){
-      const numeros = new Array(5);
-      for (let i = 0; i < numeros.length; i++) {
-        let numeroAleatorio = Math.trunc(Math.random()*10);  
-        numeros[i] = numeroAleatorio;
+
+    function eliminarUltimaFila(){
+      if(articulos.length>0){
+        const temp = Array.from(articulos);
+        temp.pop();
+        setArticulos(temp);
       }
-      setNumeros(numeros)
     }
 
-    //Hooks son como variables que se pueden reasignar con una funcion como medio que puede tener un datos inicial
-    // es parecido a un variable pero es mas como un objeto con un set y un constructor inicial en uno
-    const [numeros,setNumeros] = useState([0,0,0,0,0]);
+    const [articulos,setArticulos] = useState([
+      {
+        codigo:1,
+        descripcion:"Cebolla",
+        precio:12.45
+      },
+      {
+        codigo:2,
+        descripcion:"Zanahorias",
+        precio:4.15
+      },
+      {
+        codigo:3,
+        descripcion:"Pimenton",
+        precio:7.20
+      }
+    ]);
 
     return (
     <div>
-      <p>numeroAleatorio : {numeros}</p>
-      {
-      numeros.map(num =>
-        <p>{num}</p>
-      )
-      }
-      <button onClick={generarAleatorios }>Cambio Valor</button>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Codigo</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            articulos.map(articulo =>
+              <tr>
+                <th>{articulo.codigo}</th>
+                <th>{articulo.descripcion}</th>
+                <th>{articulo.precio}</th>
+              </tr>
+            )
+          }
+        </tbody>
+
+      </table>
+      <button onClick={eliminarUltimaFila}>Eliminar</button>
     </div>
   );
 }
