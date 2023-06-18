@@ -1,29 +1,36 @@
  import logo from './logo.svg';
 import './App.css';
-import Dado from './Dado'
+import ListadoResultados from './ListadoResultados'
+import FormularioSumar from './FormularioSumar'
 import { useState } from 'react';
 
 
 function App() {
 
-    //let valor1 = Math.trunc(Math.random()*6)+1;
-    let valor1 = Math.trunc(Math.random()*6)+1;
-    let valor2 = Math.trunc(Math.random()*6)+1;
-    let valor3 = Math.trunc(Math.random()*6)+1;
+    const [operaciones,setOperacion] = useState([]); 
 
-  function CambiarValor(){
-    
-    setValor(
-      valor+1
-    );
-  }
+    function sumar(event){
+      event.preventDefault();
+      const v1 = parseInt(event.target.valor1.value);
+      const v2 = parseInt(event.target.valor2.value);
+      const nuevoElemento = [{
+        valor1:v1,
+        valor2:v2,
+        resultado:(v1+v2)
+      }];
 
-    let [valor,setValor] = useState(0)
+      setOperacion(
+        [...operaciones,...nuevoElemento]
+      );
+      event.target.valor1.value = '';
+      event.target.valor2.value = '';
+      
+    }
 
     return (
     <div>
-      <Dado valor={valor}/>
-      <button onClick={CambiarValor}>Cambio</button>
+      <FormularioSumar onSumar={sumar}/>
+      <ListadoResultados resultados={operaciones}/>
     </div>
   );
 }
