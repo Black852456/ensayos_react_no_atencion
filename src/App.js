@@ -1,36 +1,25 @@
  import logo from './logo.svg';
 import './App.css';
-import ListadoResultados from './ListadoResultados'
-import FormularioSumar from './FormularioSumar'
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 
 
 function App() {
 
-    const [operaciones,setOperacion] = useState([]); 
+    const [texto,setTexto] = useState("");
 
-    function sumar(event){
-      event.preventDefault();
-      const v1 = parseInt(event.target.valor1.value);
-      const v2 = parseInt(event.target.valor2.value);
-      const nuevoElemento = [{
-        valor1:v1,
-        valor2:v2,
-        resultado:(v1+v2)
-      }];
+    useEffect(() => {document.title = texto},[texto]);
 
-      setOperacion(
-        [...operaciones,...nuevoElemento]
-      );
-      event.target.valor1.value = '';
-      event.target.valor2.value = '';
-      
-    }
+function cambiar(e){
+  setTexto(e.target.value);
+}
 
     return (
     <div>
-      <FormularioSumar onSumar={sumar}/>
-      <ListadoResultados resultados={operaciones}/>
+      <p>
+        <input type='text' onChange={cambiar}/>
+      </p>
+      <p>{texto}</p>
     </div>
   );
 }
